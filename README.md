@@ -59,6 +59,10 @@ USER = root
 Server=;Port=;Database=;User Id=;Password=;
 ```
 ##
+⚠️  
+**Clone o repositório e crie sua própria branch.**  
+**Atenção: Commit na main, fará com que você seja desclassificado do processo!**  
+⚠️  
 ### Dadas as informações, é hora de colocar a mão na massa! (ou melhor, mão no teclado!) :technologist:
 
 _Tenha calma, fique tranquilo(a) e sinta como se estivesse em um dia qualquer, afinal, programar já faz parte do seu dia a dia._ :nerd_face:  
