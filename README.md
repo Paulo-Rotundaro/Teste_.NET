@@ -61,6 +61,6 @@ Server=;Port=;Database=;User Id=;Password=;
 ##
 ### Dadas as informações, é hora de colocar a mão na massa! (ou melhor, mão no teclado!) :technologist:
 
-_Tenha calma, fique tranquilo e sinta como se estivesse em um dia qualquer, afinal, programar já faz parte do seu dia a dia._ :nerd_face:  
+_Tenha calma, fique tranquilo(a) e sinta como se estivesse em um dia qualquer, afinal, programar já faz parte do seu dia a dia._ :nerd_face:  
 ## Boa sorte!
-ZOSS
+Equipe ZOSS
