@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+Ôªøusing Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Globalization;
@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1.0.0",
-        Title = "ZOSS - Teste pr·tico",
+        Title = "ZOSS - Teste pr√°tico",
         Description = "Information API",
         Contact = new OpenApiContact
         {
@@ -44,10 +44,11 @@ builder.Services.AddHealthChecks();
 
 builder.Services.AddHttpClient();
 
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
 builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseMySQL("Server=metro.proxy.rlwy.net;Port=47351;Database=railway;User Id=root;Password=hWnLaIEHBpXlRhfGDIbzyVdidMqvVxyM;");
-});
+    options.UseMySQL(connectionString) 
+);
 
 var app = builder.Build();
 
@@ -57,7 +58,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZOSS - Teste pr·tico v1.0.0");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZOSS - Teste pr√°tico v1.0.0");
     });
 }
 else

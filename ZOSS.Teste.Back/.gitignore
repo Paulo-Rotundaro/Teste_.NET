@@ -1,0 +1,52 @@
+# ---- .NET / Visual Studio ----
+
+## Build results
+bin/
+obj/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## VS Code
+.vscode/
+
+## Rider
+.idea/
+
+## ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# ---- Logs ----
+*.log
+
+# ---- OS generated files ----
+.DS_Store
+Thumbs.db
+
+# ---- Environment configs ----
+# Para não subir secrets locais:
+appsettings.Development.json
+appsettings.Production.json
+secrets.json
+
+# ---- Publish output ----
+publish/
+*.publish.xml
+
+# ---- NuGet packages ----
+*.nupkg
+# The packages folder can be ignored because of PackageReference
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+
+# ---- Others ----
+*.swp
+*.swo
+*.tmp
+
+# ---- Docker ----
+**/docker-compose.override.yml
