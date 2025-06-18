@@ -47,9 +47,17 @@ builder.Services.AddDbContext<>(options =>
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZOSS - Teste prático v1.0.0");
+    });
+}
+else
+{
     app.UseHsts();
 }
 
@@ -59,17 +67,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseCors("AcceptAll");
+
 app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllers();
-
-app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZOSS - Teste prático v1.0.0");
-});
 
 var cultureInfo = new CultureInfo("pt-BR");
 cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
