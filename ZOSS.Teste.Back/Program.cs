@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Globalization;
+using ZOSS.Teste.Back.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
@@ -40,9 +44,9 @@ builder.Services.AddHealthChecks();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddDbContext<>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseMySQL();
+    options.UseMySQL("Server=metro.proxy.rlwy.net;Port=47351;Database=railway;User Id=root;Password=hWnLaIEHBpXlRhfGDIbzyVdidMqvVxyM;");
 });
 
 var app = builder.Build();
