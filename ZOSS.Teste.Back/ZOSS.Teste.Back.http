@@ -1,0 +1,6 @@
+@ZOSS.Teste.Back_HostAddress = http://localhost:5255
+
+GET {{ZOSS.Teste.Back_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
