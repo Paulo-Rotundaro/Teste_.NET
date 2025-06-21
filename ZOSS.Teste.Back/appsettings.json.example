@@ -6,7 +6,6 @@
     }
   },
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;Database=zoss_test;User Id=root;Password=root;"
-  },
-  "AllowedHosts": "*"
+    "DefaultConnection": "Server=localhost;Port=3306;Database=mydatabase;User Id=myuser;Password=mypassword"
+  }
 }
