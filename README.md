@@ -12,8 +12,6 @@ _Sabe aquele código que dá gosto de ver? Sabemos que você é capaz, e esse é
 
 ### Teste prático - Cadastro de Produtos
 
-⚠️ **Essa aplicação deve rodar em .NET 9.0** ⚠️
-
 **O que deve ser feito:**  
 
 Você deve construir uma simples API RESTful em .NET, com os seguintes requisitos:

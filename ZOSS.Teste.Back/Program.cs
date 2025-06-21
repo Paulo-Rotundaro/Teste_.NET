@@ -1,6 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
+Ôªøusing Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Globalization;
+using ZOSS.Teste.Application.Interfaces;
+using ZOSS.Teste.Application.Services;
+using ZOSS.Teste.Back.Data;
+using ZOSS.Teste.Domain.Interfaces;
+using ZOSS.Teste.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +23,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1.0.0",
-        Title = "ZOSS - Teste pr·tico",
+        Title = "ZOSS - Teste pr√°tico",
         Description = "Information API",
         Contact = new OpenApiContact
         {
@@ -27,23 +33,26 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
 
 builder.Services.AddControllers();
-
 builder.Services.AddMemoryCache();
-
 builder.Services.AddHealthChecks();
-
 builder.Services.AddHttpClient();
 
-builder.Services.AddDbContext<>(options =>
-{
-    options.UseMySQL();
-});
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+);
 
 var app = builder.Build();
 
@@ -53,7 +62,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZOSS - Teste pr·tico v1.0.0");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZOSS - Teste pr√°tico v1.0.0");
     });
 }
 else
@@ -62,14 +71,10 @@ else
 }
 
 app.UseHealthChecks("/health");
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseCors("AcceptAll");
-
 app.UseRouting();
-
 app.MapControllers();
 
 var cultureInfo = new CultureInfo("pt-BR");
