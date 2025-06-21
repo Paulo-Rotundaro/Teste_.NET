@@ -18,7 +18,7 @@ namespace ZOSS.Teste.Back.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCategory([FromBody] CategoryDTO categoryDTO)
+        public async Task<IActionResult> CreateCategory([FromBody] CategoryRequestDTO categoryDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -31,14 +31,20 @@ namespace ZOSS.Teste.Back.Controllers
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCategories), new { id = category.Id }, category);
+            var responseDTO = new CategoryResponseDTO
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+
+            return CreatedAtAction(nameof(GetCategories), new { id = category.Id }, responseDTO);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _context.Categories
-                .Select(c => new CategoryDTO
+                .Select(c => new CategoryResponseDTO
                 {
                     Id = c.Id,
                     Name = c.Name
@@ -58,7 +64,6 @@ namespace ZOSS.Teste.Back.Controllers
                 return NotFound();
             }
 
-            // Verifica se há produtos vinculados antes de deletar (boa prática)
             var hasProducts = await _context.Products.AnyAsync(p => p.CategoryId == id);
             if (hasProducts)
             {

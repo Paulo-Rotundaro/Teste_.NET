@@ -14,30 +14,39 @@ namespace ZOSS.Teste.Application.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<IEnumerable<CategoryDTO?>> GetAllAsync()
+        public async Task<IEnumerable<CategoryResponseDTO?>> GetAllAsync()
         {
             var categories = await _categoryRepository.GetAllAsync();
-            return categories.Select(c => new CategoryDTO
+            return categories.Select(c => new CategoryResponseDTO
             {
                 Id = c.Id,
                 Name = c.Name
             });
         }
 
-        public async Task<CategoryDTO?> GetByIdAsync(int id)
+        public async Task<CategoryResponseDTO?> GetByIdAsync(int id)
         {
             var c = await _categoryRepository.GetByIdAsync(id);
             if (c == null) return null;
 
-            return new CategoryDTO { Id = c.Id, Name = c.Name };
+            return new CategoryResponseDTO { Id = c.Id, Name = c.Name };
         }
 
-        public async Task<CategoryDTO?> CreateAsync(CategoryDTO categoryDto)
+        public async Task<CategoryResponseDTO?> CreateAsync(CategoryRequestDTO categoryDto)
         {
             var category = new Category { Name = categoryDto.Name };
             await _categoryRepository.AddAsync(category);
+            return new CategoryResponseDTO { Id = category.Id, Name = category.Name };
+        }
 
-            return new CategoryDTO { Id = category.Id, Name = category.Name };
+        Task<IEnumerable<CategoryResponseDTO?>> ICategoryService.GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<CategoryResponseDTO?> ICategoryService.GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

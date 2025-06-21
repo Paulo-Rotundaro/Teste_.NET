@@ -4,8 +4,8 @@ namespace ZOSS.Teste.Application.Interfaces
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<CategoryDTO?>> GetAllAsync();
-        Task<CategoryDTO?> GetByIdAsync(int id);
-        Task<CategoryDTO?> CreateAsync(CategoryDTO categoryDto);
+        Task<IEnumerable<CategoryResponseDTO?>> GetAllAsync();
+        Task<CategoryResponseDTO?> GetByIdAsync(int id);
+        Task<CategoryResponseDTO?> CreateAsync(CategoryRequestDTO categoryDto);
     }
 }

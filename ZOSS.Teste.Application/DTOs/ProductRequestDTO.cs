@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace ZOSS.Teste.Back.Models
+﻿namespace ZOSS.Teste.Back.Models
 {
     public class ProductRequestDTO
     {
